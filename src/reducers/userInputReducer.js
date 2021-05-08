@@ -3,7 +3,7 @@ import * as actions from "../actions/userFormActions"
 export const initialState = {
     name: "",
     DOB: "",
-    favNumber: "",
+    randomNumber: "",
     email: "",
     inputName: "",
     inputDOB: "",

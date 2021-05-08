@@ -21,13 +21,13 @@ const generateColors = (num) => {
     return colors
 }
 
-const Canvas = ({ favNumber }) => {
-    const [colors, setColors] = useState(generateColors(favNumber * favNumber));
+const Canvas = ({ randomNumber }) => {
+    const [colors, setColors] = useState(generateColors(randomNumber * randomNumber));
 
     return (
         <div className={styles.boxContainer}>
             {
-                favNumber ? (
+                randomNumber ? (
                         <>
                             {
                                 colors.map(color => (
@@ -52,7 +52,7 @@ const Canvas = ({ favNumber }) => {
 }
 
 const mapStateToProps = (state) => ({
-    favNumber: state.favNumber
+    randomNumber: state.randomNumber
 
 
 })

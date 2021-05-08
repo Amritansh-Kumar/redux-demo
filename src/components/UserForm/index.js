@@ -30,7 +30,7 @@ const UserForm = ({
 
 
     const fetchValidationMessages = (
-        name, dob, favNum, email
+        name, dob, randomNum, email
     ) => {
         const validationMessages = {
             nameValidationMessage: "",
@@ -45,14 +45,14 @@ const UserForm = ({
         if (!dob) {
             validationMessages.DOBValidationMessage = INPUT_REQUIRED_MESSAGE;
         }
-        if (!favNum) {
+        if (!randomNum) {
             validationMessages.numberValidationMessage = INPUT_REQUIRED_MESSAGE;
         }
         if (!email) {
             validationMessages.emailValidationMessage = INPUT_REQUIRED_MESSAGE;
         }
 
-        if (favNum < 0 || favNum > 100) {
+        if (randomNum < 0 || randomNum > 100) {
             validationMessages.numberValidationMessage = NUMBER_VALIDATION_MESSAGE;
         }
 
@@ -132,12 +132,12 @@ const UserForm = ({
                     )}
                 </div>
                 <div className={styles.inputContainer}>
-                    <label className={styles.inputLabel}>*Favourite Number</label>
+                    <label className={styles.inputLabel}>*Random Number</label>
                     <input
                         className={styles.input}
                         type="number"
-                        id="favNumber"
-                        name="favNumber"
+                        id="randomNumber"
+                        name="randomNumber"
                         value={inputNumber}
                         required
                         onChange={(e) => {
@@ -236,7 +236,7 @@ const UserForm = ({
                             dispatch(submitUserForm({
                                 name: inputName,
                                 DOB: inputDOB,
-                                favNumber: inputNumber,
+                                randomNumber: inputNumber,
                                 email: inputEmail,
                             }))
                         } else {

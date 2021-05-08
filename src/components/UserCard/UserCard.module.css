@@ -1,5 +1,5 @@
 @value colors: "../../App.css";
-@value secondaryTheme from colors;
+@value secondaryTheme, secondaryThemeLight from colors;
 
 .cardHeading {
     align-self: center;
@@ -22,12 +22,12 @@
 }
 
 .userCard {
-    background-color: #f5f5f5;
+    background-color: secondaryThemeLight;
     border-radius: 5px;
     box-shadow: 0 0 5px 2px gray;
     display: flex;
     flex-direction: column;
-    max-width: 350px;
+    max-width: 450px;
     padding: 24px;
 }
 
@@ -43,6 +43,7 @@
 
 .userDetailRow {
     margin: 5px 0;
+    max-width: 400px;
 }
 
 @media (max-width: 390px) {

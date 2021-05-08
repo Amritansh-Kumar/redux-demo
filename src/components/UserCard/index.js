@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./UserCard.module.css"
 
-const UserCard = ({ name, DOB, favNumber, email }) => {
+const UserCard = ({ name, DOB, randomNumber, email }) => {
     return (
         <div className={styles.userCardContainer}>
             {
@@ -19,8 +19,8 @@ const UserCard = ({ name, DOB, favNumber, email }) => {
                                     <td>{DOB}</td>
                                 </tr>
                                 <tr className={styles.userDetailRow}>
-                                    <td><b>Fav Number:</b></td>
-                                    <td>{favNumber}</td>
+                                    <td><b>Random Number:</b></td>
+                                    <td>{randomNumber}</td>
                                 </tr>
                                 <tr className={styles.userDetailRow}>
                                     <td><b>Email:</b></td>
@@ -41,7 +41,7 @@ const UserCard = ({ name, DOB, favNumber, email }) => {
 const mapStateToProps = (state) => ({
     name: state.name,
     DOB: state.DOB,
-    favNumber: state.favNumber,
+    randomNumber: state.randomNumber,
     email: state.email
 })
 
