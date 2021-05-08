@@ -6,7 +6,7 @@ const Box = ({ color }) => {
             backgroundColor:color, width: "2rem", height:"2rem"
         }}
         />
-    )
-}
+    );
+};
 
-export default Box
+export default Box;

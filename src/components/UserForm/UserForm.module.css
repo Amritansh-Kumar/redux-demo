@@ -55,6 +55,14 @@ input:focus {
     box-shadow: 0 0 5px 2px lightgray;
 }
 
+.submitButtonDisabled {
+    cursor: not-allowed;
+}
+
+.submitButtonDisabled:hover {
+    box-shadow: none;
+}
+
 .validationMessage {
     color: red;
 }

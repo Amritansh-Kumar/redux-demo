@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "../Sidebar"
-import { Switch, Route, Redirect } from "react-router-dom"
+import Sidebar from "../Sidebar";
+import { Switch, Route, Redirect } from "react-router-dom";
 import UserForm from "../UserForm";
 import styles from "./Home.module.css"
 import UserCard from "../UserCard";

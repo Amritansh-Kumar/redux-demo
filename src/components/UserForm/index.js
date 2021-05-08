@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./UserForm.module.css"
+import styles from "./UserForm.module.css";
+import cx from "classnames";
 import { connect, useDispatch } from "react-redux";
 import {
     submitUserForm,
@@ -8,7 +9,7 @@ import {
     updateInputNumber,
     updateInputEmail,
     getValidationMessages,
-} from "../../actions/userFormActions"
+} from "../../actions/userFormActions";
 
 const INPUT_REQUIRED_MESSAGE = "This Field is required!";
 const NUMBER_VALIDATION_MESSAGE = "Enter a Number ranging from 0 to 100";
@@ -26,7 +27,7 @@ const UserForm = ({
                       numberValidationMessage,
                       emailValidationMessage
     }) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
 
     const fetchValidationMessages = (
@@ -37,7 +38,7 @@ const UserForm = ({
             DOBValidationMessage: "",
             numberValidationMessage: "",
             emailValidationMessage: "",
-        }
+        };
 
         if (!name) {
             validationMessages.nameValidationMessage = INPUT_REQUIRED_MESSAGE;
@@ -62,17 +63,24 @@ const UserForm = ({
         }
 
         return validationMessages;
-    }
+    };
 
     const validationMessages = fetchValidationMessages(
         inputName, inputDOB, inputNumber, inputEmail
-    )
+    );
+
+    const isValid = (
+        !validationMessages.nameValidationMessage &&
+        !validationMessages.DOBValidationMessage &&
+        !validationMessages.numberValidationMessage &&
+        !validationMessages.emailValidationMessage
+    );
 
     const onFocusValidator = (validationMessageProperty) => {
         dispatch(getValidationMessages({
             [validationMessageProperty]: ""
         }));
-    }
+    };
 
     const onBlurValidator = (fieldValue, validationMessageProperty) => {
         if (!fieldValue.trim()) {
@@ -80,7 +88,7 @@ const UserForm = ({
                 [validationMessageProperty]: INPUT_REQUIRED_MESSAGE
             }));
         }
-    }
+    };
 
     return (
         <div className={styles.formContainer}>
@@ -224,21 +232,17 @@ const UserForm = ({
                     )}
                 </div>
                 <button
-                    className={styles.submitButton}
+                    className={cx(styles.submitButton, { [styles.submitButtonDisabled]: !isValid })}
                     type="button"
+                    disabled={!isValid}
                     onClick={() => {
-                        if (
-                            !validationMessages.nameValidationMessage &&
-                            !validationMessages.DOBValidationMessage &&
-                            !validationMessages.numberValidationMessage &&
-                            !validationMessages.emailValidationMessage
-                        ) {
+                        if (isValid) {
                             dispatch(submitUserForm({
                                 name: inputName,
                                 DOB: inputDOB,
                                 randomNumber: inputNumber,
                                 email: inputEmail,
-                            }))
+                            }));
                         } else {
                             dispatch(getValidationMessages(validationMessages));
                         }
@@ -248,7 +252,7 @@ const UserForm = ({
                 </button>
             </form>
         </div>
-    )
+    );
 }
 
 const mapStateToProps = (state) => ({
@@ -260,6 +264,6 @@ const mapStateToProps = (state) => ({
     DOBValidationMessage: state.DOBValidationMessage,
     numberValidationMessage: state.numberValidationMessage,
     emailValidationMessage: state.emailValidationMessage,
-})
+});
 
 export default connect(mapStateToProps)(UserForm);

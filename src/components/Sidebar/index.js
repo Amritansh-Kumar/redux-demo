@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { NavLink } from 'react-router-dom';
-import styles from "./Sidebar.module.css"
+import styles from "./Sidebar.module.css";
 import cx from "classnames";
 import {
     faAngleDoubleRight,
@@ -10,8 +10,8 @@ import {
     faHome,
     faPalette,
     faUser
-} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = () => {
     const [showSubMenu, setShowSubMenu] = useState(false);
@@ -107,7 +107,7 @@ const Sidebar = () => {
                 )}
             </nav>
         </div>
-    )
+    );
 }
 
 export default Sidebar;

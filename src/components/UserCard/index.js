@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import styles from "./UserCard.module.css"
+import styles from "./UserCard.module.css";
 
 const UserCard = ({ name, DOB, randomNumber, email }) => {
     return (
@@ -35,7 +35,7 @@ const UserCard = ({ name, DOB, randomNumber, email }) => {
                     )
             }
         </div>
-    )
+    );
 }
 
 const mapStateToProps = (state) => ({
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => ({
     DOB: state.DOB,
     randomNumber: state.randomNumber,
     email: state.email
-})
+});
 
 
 export default connect(mapStateToProps)(UserCard);
