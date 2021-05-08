@@ -1,34 +1,62 @@
 import React, {useState} from "react";
 import { NavLink } from 'react-router-dom';
 import styles from "./Sidebar.module.css"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import cx from "classnames";
 import {
-    faHome,
+    faAngleDoubleRight,
+    faAngleDoubleLeft,
     faCaretUp,
     faCaretDown,
+    faHome,
     faPalette,
     faUser
 } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Sidebar = () => {
     const [showSubMenu, setShowSubMenu] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     return (
-        <div className={styles.sidebar}>
-            <h1 className={styles.sidebarHeading}>
+        <div className={sidebarCollapsed ? styles.sidebarCollapsed : styles.sidebar}>
+            <h1 className={
+                sidebarCollapsed ? styles.sidebarHeadingCollapsed : styles.sidebarHeading
+            }>
                 Demo
             </h1>
+            <FontAwesomeIcon
+                className={styles.toggleSidebarIcon}
+                icon={sidebarCollapsed ? faAngleDoubleRight : faAngleDoubleLeft}
+                onClick={() => {
+                    setSidebarCollapsed(!sidebarCollapsed);
+                }}
+            />
             <nav>
-                <NavLink className={styles.menuItemContainer} exact to="/" onClick={() => {
+                <NavLink
+                    className={
+                        cx(styles.menuItemContainer, { [styles.subMenuActive]: showSubMenu })
+                    }
+                    exact
+                    to="/"
+                    onClick={() => {
                     setShowSubMenu(!showSubMenu)
                 }} >
-                    <div className={styles.menuItem}>
-                        <FontAwesomeIcon icon={faHome} />
-                        <span className={styles.menuItemLabel}>
+                    <div className={
+                        sidebarCollapsed ? styles.menuItemCollapsed : styles.menuItem
+                    }>
+                        <FontAwesomeIcon
+                            className={sidebarCollapsed ? styles.menuIconCollapsed : styles.menuIcon}
+                            icon={faHome}
+                        />
+                        <span className={
+                            sidebarCollapsed ? styles.menuItemLabelCollapsed : styles.menuItemLabel
+                        }>
                             Home
                         </span>
                         <FontAwesomeIcon
-                            className={styles.caretIcon}
+                            className={
+                                sidebarCollapsed ? styles.caretIconCollapsed : styles.caretIcon
+                            }
                             icon={showSubMenu ? faCaretUp : faCaretDown}
                         />
                     </div>
@@ -37,22 +65,40 @@ const Sidebar = () => {
                     <div className={styles.subMenu}>
                         <NavLink
                             className={styles.subMenuItemContainer}
-                            exact to={"/Canvas"}
+                            exact
+                            to={"/Canvas"}
+                            activeClassName={styles.active}
                         >
-                            <div className={styles.menuItem}>
-                                <FontAwesomeIcon icon={faPalette} />
-                                <span className={styles.menuItemLabel}>
+                            <div className={
+                                sidebarCollapsed ? styles.menuItemCollapsed : styles.menuItem
+                            }>
+                                <FontAwesomeIcon
+                                    className={sidebarCollapsed ? styles.menuIconCollapsed : styles.menuIcon}
+                                    icon={faPalette}
+                                />
+                                <span className={
+                                    sidebarCollapsed ? styles.menuItemLabelCollapsed : styles.menuItemLabel
+                                }>
                                     Canvas
                                 </span>
                             </div>
                         </NavLink>
                         <NavLink
                             className={styles.subMenuItemContainer}
-                            exact to={"/user"}
+                            exact
+                            to={"/user"}
+                            activeClassName={styles.active}
                         >
-                            <div className={styles.menuItem}>
-                                <FontAwesomeIcon icon={faUser} />
-                                <span className={styles.menuItemLabel}>
+                            <div className={
+                                sidebarCollapsed ? styles.menuItemCollapsed : styles.menuItem
+                            }>
+                                <FontAwesomeIcon
+                                    className={sidebarCollapsed ? styles.menuIconCollapsed : styles.menuIcon}
+                                    icon={faUser}
+                                />
+                                <span className={
+                                    sidebarCollapsed ? styles.menuItemLabelCollapsed : styles.menuItemLabel
+                                }>
                                     User
                                 </span>
                             </div>

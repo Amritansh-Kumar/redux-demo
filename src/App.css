@@ -1,5 +1,6 @@
 @value primaryTheme: #0a1f35;
 @value secondaryTheme: #ff744d;
+@value secondaryThemeLight: rgba(255,143,77,.36);
 
 .App {
   text-align: center;

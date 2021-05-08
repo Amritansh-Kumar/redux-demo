@@ -35,10 +35,42 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    max-height: 100vh;
+    overflow-y: auto;
     width: 100%;
 }
 
 
 .userDetailRow {
     margin: 5px 0;
+}
+
+@media (max-width: 390px) {
+    .userCard {
+        padding: 16px;
+    }
+
+    .userDetailRow {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 340px) {
+    .userCard {
+        padding: 4px;
+    }
+
+    .userDetailRow {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 300px) {
+    .userCard {
+        padding: 2px;
+    }
+
+    .userDetailRow {
+        font-size: 10px;
+    }
 }

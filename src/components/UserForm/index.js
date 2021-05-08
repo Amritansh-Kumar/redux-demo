@@ -149,12 +149,22 @@ const UserForm = ({
                                     }
                                 ));
                             } else {
-                                dispatch(getValidationMessages({
-                                    numberValidationMessage: ""
-                                }));
+                                onFocusValidator("numberValidationMessage");
                             }
                         }}
-                        onFocus={() => onFocusValidator("numberValidationMessage")}
+                        onFocus={
+                            (e) => {
+                                if (e.target.value < 0 || e.target.value > 100) {
+                                    dispatch(getValidationMessages(
+                                        {
+                                            numberValidationMessage: NUMBER_VALIDATION_MESSAGE
+                                        }
+                                    ));
+                                } else {
+                                    onFocusValidator("numberValidationMessage");
+                                }
+                            }
+                        }
                         onBlur={(e) => onBlurValidator(e.target.value,"numberValidationMessage")}
                     />
                     {numberValidationMessage && (
@@ -185,12 +195,24 @@ const UserForm = ({
                                     }
                                 ));
                             } else {
-                                dispatch(getValidationMessages({
-                                    emailValidationMessage: ""
-                                }));
+                                onFocusValidator("emailValidationMessage");
                             }
                         }}
-                        onFocus={() => onFocusValidator("emailValidationMessage")}
+                        onFocus={
+                            (e) => {
+                                if (
+                                    e.target.value && !EMAIL_REGEX.test(e.target.value)
+                                ) {
+                                    dispatch(getValidationMessages(
+                                        {
+                                            emailValidationMessage: INVALID_EMAIL_MESSAGE
+                                        }
+                                    ));
+                                } else {
+                                    onFocusValidator("emailValidationMessage");
+                                }
+                            }
+                        }
                         onBlur={(e) => onBlurValidator(e.target.value,"emailValidationMessage")}
                     />
                     {emailValidationMessage && (

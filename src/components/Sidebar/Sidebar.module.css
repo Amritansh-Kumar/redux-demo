@@ -1,13 +1,34 @@
 @value colors: "../../App.css";
-@value primaryTheme from colors;
+@value primaryTheme, secondaryTheme, secondaryThemeLight from colors;
+
+.active {
+    background: secondaryThemeLight;
+}
 
 .caretIcon {
     padding-right: 24px;
 }
 
+.caretIconCollapsed {
+    padding-left: 32px;
+}
+
+.menuIcon {
+    font-size: inherit;
+}
+
+.menuIconCollapsed {
+    font-size: 24px;
+}
+
 .menuItem {
     display: flex;
     padding-left: 24px;
+}
+
+.menuItemCollapsed {
+    display: flex;
+    padding-left: 16px;
 }
 
 .menuItemContainer {
@@ -21,7 +42,7 @@
 }
 
 .menuItemContainer:hover {
-    background: rgba(255,143,77,.36);
+    background: secondaryThemeLight;
     cursor: pointer;
 }
 
@@ -30,13 +51,28 @@
     margin-left: 20px;
 }
 
+.menuItemLabelCollapsed {
+    display: none;
+}
+
 .sidebar {
     background-color: primaryTheme;
     display: flex;
     flex-direction: column;
     height: 100vh;
     max-width: 250px;
-    width: 250px;
+    min-width: 250px;
+    transition: max-width 0.4s ease-in-out,min-width 0.4s ease-in-out;
+}
+
+.sidebarCollapsed {
+    background-color: primaryTheme;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 100px;
+    min-width: 100px;
+    transition: max-width 0.4s ease-in-out,min-width 0.4s ease-in-out;
 }
 
 .sidebarHeading {
@@ -44,9 +80,19 @@
     text-align: center;
 }
 
+.sidebarHeadingCollapsed {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+}
+
 .subMenu {
     display: flex;
     flex-direction: column;
+}
+
+.subMenuActive {
+    border-left: 2px solid secondaryTheme;
 }
 
 .subMenuItemContainer {
@@ -62,6 +108,46 @@
 }
 
 .subMenuItemContainer:hover {
-    background: rgba(255,143,77,.36);
+    background: secondaryThemeLight;
     cursor: pointer;
+}
+
+.toggleSidebarIcon {
+    align-self: flex-end;
+    color: white;
+    cursor: pointer;
+    font-size: 40px;
+    opacity: 0.8;
+    padding: 10px 5px;
+}
+
+.toggleSidebarIcon:hover {
+    opacity: 1;
+}
+
+@media (max-width: 700px) {
+    .caretIcon {
+        padding-left: 32px;
+    }
+
+    .menuIcon {
+        font-size: 24px;
+    }
+
+    .menuItem {
+        padding-left: 16px;
+    }
+
+    .menuItemLabel {
+        display: none;
+    }
+
+    .sidebar {
+        max-width: 100px;
+        min-width: 100px;
+    }
+
+    .toggleSidebarIcon {
+        display: none;
+    }
 }
