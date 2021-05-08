@@ -11,9 +11,10 @@ import {
     getValidationMessages,
 } from "../../actions/userFormActions";
 
-const INPUT_REQUIRED_MESSAGE = "This Field is required!";
-const NUMBER_VALIDATION_MESSAGE = "Enter a Number ranging from 0 to 100";
 const INVALID_EMAIL_MESSAGE = "Enter a valid email address";
+const INPUT_REQUIRED_MESSAGE = "This Field is required!";
+const INVALID_DATE_MESSAGE = "Date should not exceed today's date";
+const NUMBER_VALIDATION_MESSAGE = "Enter a Number ranging from 0 to 100";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-]+$/;
 
@@ -31,7 +32,7 @@ const UserForm = ({
 
 
     const fetchValidationMessages = (
-        name, dob, randomNum, email
+        name, DOB, randomNum, email
     ) => {
         const validationMessages = {
             nameValidationMessage: "",
@@ -40,26 +41,37 @@ const UserForm = ({
             emailValidationMessage: "",
         };
 
-        if (!name) {
-            validationMessages.nameValidationMessage = INPUT_REQUIRED_MESSAGE;
-        }
-        if (!dob) {
-            validationMessages.DOBValidationMessage = INPUT_REQUIRED_MESSAGE;
-        }
-        if (!randomNum) {
-            validationMessages.numberValidationMessage = INPUT_REQUIRED_MESSAGE;
-        }
         if (!email) {
             validationMessages.emailValidationMessage = INPUT_REQUIRED_MESSAGE;
         }
 
-        if (randomNum < 0 || randomNum > 100) {
-            validationMessages.numberValidationMessage = NUMBER_VALIDATION_MESSAGE;
+        if (!DOB) {
+            validationMessages.DOBValidationMessage = INPUT_REQUIRED_MESSAGE;
+        }
+
+        if (!name) {
+            validationMessages.nameValidationMessage = INPUT_REQUIRED_MESSAGE;
+        }
+
+        if (!randomNum) {
+            validationMessages.numberValidationMessage = INPUT_REQUIRED_MESSAGE;
+        }
+
+        if (
+            DOB &&
+            new Date(DOB).setHours(0,0,0,0) >
+            new Date().setHours(0,0,0,0)
+        ) {
+            validationMessages.DOBValidationMessage = INVALID_DATE_MESSAGE
         }
 
         if (email && !EMAIL_REGEX.test(email)
         ) {
             validationMessages.emailValidationMessage = INVALID_EMAIL_MESSAGE;
+        }
+
+        if (randomNum < 0 || randomNum > 100) {
+            validationMessages.numberValidationMessage = NUMBER_VALIDATION_MESSAGE;
         }
 
         return validationMessages;
@@ -127,8 +139,37 @@ const UserForm = ({
                         required
                         onChange={(e) => {
                             dispatch(updateInputDOB(e.target.value))
+                            if (
+                                e.target.value &&
+                                new Date(e.target.value).setHours(0,0,0,0) >
+                                new Date().setHours(0,0,0,0)
+                            ) {
+                                dispatch(getValidationMessages(
+                                    {
+                                        DOBValidationMessage: INVALID_DATE_MESSAGE
+                                    }
+                                ));
+                            } else {
+                                onFocusValidator("DOBValidationMessage");
+                            }
                         }}
-                        onFocus={() => onFocusValidator("DOBValidationMessage")}
+                        onFocus={
+                            (e) => {
+                                if (
+                                    e.target.value &&
+                                    new Date(e.target.value).setHours(0,0,0,0) >
+                                    new Date().setHours(0,0,0,0)
+                                ) {
+                                    dispatch(getValidationMessages(
+                                        {
+                                            DOBValidationMessage: INVALID_DATE_MESSAGE
+                                        }
+                                    ));
+                                } else {
+                                    onFocusValidator("DOBValidationMessage");
+                                }
+                            }
+                        }
                         onBlur={(e) => onBlurValidator(e.target.value,"DOBValidationMessage")}
                     />
                     {DOBValidationMessage && (
