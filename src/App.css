@@ -1,3 +1,6 @@
+@value primaryTheme: #0a1f35;
+@value secondaryTheme: #ff744d;
+
 .App {
   text-align: center;
 }

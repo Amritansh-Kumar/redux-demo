@@ -1,0 +1,33 @@
+@value colors: "../../App.css";
+@value secondaryTheme from colors;
+
+.boxContainer{
+    align-items: center;
+    display:flex;
+    flex:1;
+    flex-wrap:wrap;
+    justify-content: center;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.fillFormButton {
+    background-color: secondaryTheme;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    text-decoration: none;
+    width: 80px;
+}
+
+.fillFormButton:hover {
+    box-shadow: 0 0 5px 2px gray;
+}
+
+.fillFormContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
